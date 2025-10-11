@@ -1,9 +1,13 @@
 <?php
+
 declare(strict_types=1);
 
-function dd($a){
+// namespace App;
+
+function dd(mixed $value = "None")
+{
     echo "<pre>";
-    var_dump($a);
-    echo"</pre>";
+    var_dump($value);
+    echo "</pre>";
     die();
 }
