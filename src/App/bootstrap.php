@@ -8,12 +8,12 @@ require __DIR__ . "/../../vendor/autoload.php";
 
 
 use Framework\App;
-
+use App\Controllers\HomeController;
 $app = new App();
-$app->get("/");
-$app->get("/home");
+$app->get("/",[HomeController::class,'home']);
+// $app->get("/home");
 
-dd($app);
+
 return $app;
 
 // as you see ,the job of this file is prepare and return an instance of App (load  an configure the files necessery for our application)
