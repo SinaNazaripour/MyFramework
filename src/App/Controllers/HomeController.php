@@ -18,6 +18,6 @@ class HomeController
     }
     public function home()
     {
-        $this->view->render("/index.php", ['message' => 'sina']);
+        echo $this->view->render("/index.php", ['message' => 'daddy']);
     }
 }

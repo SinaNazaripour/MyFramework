@@ -11,6 +11,13 @@ class TemplateEngine
     public function render($path, array $data = [])
     {
         extract($data, EXTR_SKIP);
-        include $this->basePath . $path;
+        ob_start();
+        include "{$this->basePath}{$path}";
+
+        $output = ob_get_contents();
+
+        ob_end_clean();
+
+        return $output;
     }
 }

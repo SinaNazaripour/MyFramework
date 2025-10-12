@@ -28,7 +28,7 @@ class Router
         return "/{$path}/";
     }
 
-    public function dispatch(string $path, string $method)
+    public function dispatch(string $path = "/", string $method = "GET")
     {
         $path = $this->normalizePath($path);
         $method = strtoupper($method);
