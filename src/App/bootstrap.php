@@ -11,6 +11,8 @@ use Framework\App;
 use App\Controllers\HomeController;
 $app = new App();
 $app->get("/",[HomeController::class,'home']);
+$app->get("/god",[HomeController::class,'god']);
+
 // $app->get("/home");
 
 

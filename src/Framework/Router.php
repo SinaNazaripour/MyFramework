@@ -8,12 +8,12 @@ class Router
 {
     private array  $routes = [];
 
-    public function add(string $method = "GET", string $path,array $controller)
+    public function add(string $method = "GET", string $path, array $controller)
     {
         $this->routes[] = [
             'path' => $this->normalizePath($path),
             'method' => strtoupper($method),
-            'controller'=>$controller
+            'controller' => $controller
         ];
     }
 
@@ -24,17 +24,23 @@ class Router
         // };
 
         $path = trim($path, "/");
-        $path=preg_replace("#[/]{2,}#","/",$path);
+        $path = preg_replace("#[/]{2,}#", "/", $path);
         return "/{$path}/";
-
     }
 
-    public function dispatch(string $path,string $method)
+    public function dispatch(string $path, string $method)
     {
-        $path=$this->normalizePath($path);
-        $method=strtoupper($method);
+        $path = $this->normalizePath($path);
+        $method = strtoupper($method);
 
-        echo $method.$path;
+        foreach ($this->routes as $route) {
+            if (!preg_match("#^{$route['path']}$#", $path) || ($method !== $route['method'])) {
+                continue;
+            }
+            [$class, $function] = $route['controller'];
 
+            $controlerInstance = new $class;
+            $controlerInstance->{$function}();
+        }
     }
 }
