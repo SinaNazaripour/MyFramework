@@ -8,17 +8,9 @@ require __DIR__ . "/../../vendor/autoload.php";
 
 
 use Framework\App;
-use App\Controllers\HomeController;
-use App\Controllers\AboutController;
+use function App\Config\registerRoutes;
+
 
 $app = new App();
-$app->get("/", [HomeController::class, 'home']);
-$app->get("/about", [AboutController::class, 'about']);
-
-
-// $app->get("/home");
-
-
+registerRoutes($app);
 return $app;
-
-// as you see ,the job of this file is prepare and return an instance of App (load  an configure the files necessery for our application)
