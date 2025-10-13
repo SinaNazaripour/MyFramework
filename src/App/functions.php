@@ -11,3 +11,8 @@ function dd(mixed $value = "None")
     echo "</pre>";
     die();
 }
+
+function e($value): string
+{
+    return htmlspecialchars((string) $value);
+}

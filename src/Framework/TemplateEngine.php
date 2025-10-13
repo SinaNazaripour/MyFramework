@@ -12,12 +12,17 @@ class TemplateEngine
     {
         extract($data, EXTR_SKIP);
         ob_start();
-        include "{$this->basePath}{$path}";
+        include "{$this->resolve($path)}";
 
         $output = ob_get_contents();
 
         ob_end_clean();
 
         return $output;
+    }
+
+    public function resolve($path)
+    {
+        return "{$this->basePath}/{$path}";
     }
 }
