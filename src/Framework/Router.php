@@ -28,7 +28,7 @@ class Router
         return "/{$path}/";
     }
 
-    public function dispatch(string $path, string $method = "GET")
+    public function dispatch(string $path, string $method = "GET", Container|null $container = null)
     {
         $path = $this->normalizePath($path);
         $method = strtoupper($method);
@@ -39,7 +39,7 @@ class Router
             }
             [$class, $function] = $route['controller'];
 
-            $controlerInstance = new $class;
+            $controlerInstance = $container ? $container->resolve($class) : new $class;
             $controlerInstance->{$function}();
         }
     }
