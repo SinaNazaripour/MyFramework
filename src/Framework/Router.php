@@ -7,6 +7,7 @@ namespace Framework;
 class Router
 {
     private array  $routes = [];
+    private array $middleWares = [];
 
     public function add(string $method = "GET", string $path, array $controller)
     {
