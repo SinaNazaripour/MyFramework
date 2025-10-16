@@ -13,6 +13,7 @@ class AboutController
 
     public function about()
     {
+        var_dump($this->view);
         echo $this->view->render("/about.php", [
             "dangerousData" => "<script>alert('danger')</script>"
         ]);

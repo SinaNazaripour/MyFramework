@@ -28,8 +28,8 @@ class TemplateEngine
         return "{$this->basePath}/{$path}";
     }
 
-    public function addGlobalData($globalData)
+    public function addGlobalData($data)
     {
-        $this->globalData[] = $globalData;
+        $this->globalData = [...$data, ...$this->globalData];
     }
 }
