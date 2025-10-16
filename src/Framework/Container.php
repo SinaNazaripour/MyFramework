@@ -12,6 +12,7 @@ use ReflectionNamedType;
 class Container
 {
     private array $definitions = [];
+    private array $resolved = [];
 
     public function addDefinitions($newDefinitions)
     {
@@ -55,12 +56,19 @@ class Container
 
     public function get(string $id)
     {
+
         if (!array_key_exists($id, $this->definitions)) {
             throw new ContainerException("class{$id} is not defined in container.");
         }
 
+        if (array_key_exists($id, $this->resolved)) {
+            return $this->resolved[$id];
+        }
+
         $factory = $this->definitions[$id];
         $dependency = $factory();
+
+        $this->resolved[$id] = $dependency;
         return $dependency;
     }
 }
