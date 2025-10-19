@@ -15,7 +15,7 @@
         <label class="block">
             <span class="text-gray-700">Age</span>
             <input
-                name="Age"
+                name="age"
                 type="number"
                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 placeholder="" />
@@ -24,7 +24,7 @@
         <label class="block">
             <span class="text-gray-700">Country</span>
             <select
-                name="Country"
+                name="country"
                 class="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                 <option value="USA">USA</option>
                 <option value="Canada">Canada</option>
@@ -36,7 +36,7 @@
         <label class="block">
             <span class="text-gray-700">Social Media URL</span>
             <input
-                name="SociaMedia"
+                name="sociaMedia"
                 type="text"
                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 placeholder="" />
@@ -54,7 +54,7 @@
         <label class="block">
             <span class="text-gray-700">Confirm Password</span>
             <input
-                name="ConfirmPassword"
+                name="confirmPassword"
                 type="password"
                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 placeholder="" />
@@ -65,7 +65,7 @@
                 <div>
                     <label class="inline-flex items-center">
                         <input
-                            name="STO"
+                            name="sto"
                             class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-offset-0 focus:ring-indigo-200 focus:ring-opacity-50"
                             type="checkbox" required />
                         <span class="ml-2">I accept the terms of service.</span>
