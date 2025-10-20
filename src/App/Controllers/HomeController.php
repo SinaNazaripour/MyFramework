@@ -14,7 +14,7 @@ class HomeController
     public function __construct(private TemplateEngine $view) {}
     public function home()
     {
-        var_dump($this->view);
+
         echo $this->view->render("/index.php", ['message' => 'daddy', "title" => "home"]);
     }
 }

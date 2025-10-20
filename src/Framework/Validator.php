@@ -22,17 +22,21 @@ class Validator
         $errors = [];
         foreach ($fields as $fieldName => $rules) {
             foreach ($rules as $rule) {
+                $params = [];
+                if (str_contains($rule, ":")) {
+                    [$rule, $params] = explode(":", $rule);
+                    $params = explode(",", $params);
+                }
                 $ruleValidator = $this->rules[$rule];
-
-                if ($ruleValidator->validate($formData, $fieldName, [])) {
+                if ($ruleValidator->validate($formData, $fieldName, $params ?? [])) {
                     continue;
                 }
 
-                $errors[$fieldName][] = $ruleValidator->getMessage($formData, $fieldName, []);
+                $errors[$fieldName][] = $ruleValidator->getMessage($formData, $fieldName, $params ?? []);
             }
         }
         if (count($errors)) {
-            throw new ValidationException();
+            throw new ValidationException($errors);
         }
     }
 }

@@ -13,6 +13,7 @@ class TemplateEngine
     {
         extract($data, EXTR_SKIP);
         extract($this->globalData, EXTR_SKIP);
+        // $data = [...$data, ...$this->globalData];
         ob_start();
         include "{$this->resolve($path)}";
 

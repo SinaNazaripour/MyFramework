@@ -11,6 +11,11 @@
                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 placeholder="john@example.com" />
         </label>
+        <?php if (array_key_exists("email", $errors)): ?>
+            <div class="bg-gray-100 mt-2 p-2 text-red-500">
+                <?php echo e($errors['email'][0]) ?>
+            </div>
+        <?php endif; ?>
         <!-- Age -->
         <label class="block">
             <span class="text-gray-700">Age</span>
@@ -20,6 +25,11 @@
                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 placeholder="" />
         </label>
+        <?php if (array_key_exists("age", $errors)): ?>
+            <div class="bg-gray-100 mt-2 p-2 text-red-500">
+                <?php echo e($errors['age'][0]) ?>
+            </div>
+        <?php endif; ?>
         <!-- Country -->
         <label class="block">
             <span class="text-gray-700">Country</span>
@@ -32,15 +42,25 @@
                 <option value="Invalid">Invalid Country</option>
             </select>
         </label>
+        <?php if (array_key_exists("country", $errors)): ?>
+            <div class="bg-gray-100 mt-2 p-2 text-red-500">
+                <?php echo e($errors['country'][0]) ?>
+            </div>
+        <?php endif; ?>
         <!-- Social Media URL -->
         <label class="block">
             <span class="text-gray-700">Social Media URL</span>
             <input
-                name="sociaMedia"
+                name="socialMedia"
                 type="text"
                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 placeholder="" />
         </label>
+        <?php if (array_key_exists("socialMedia", $errors)): ?>
+            <div class="bg-gray-100 mt-2 p-2 text-red-500">
+                <?php echo e($errors['socialMedia'][0]) ?>
+            </div>
+        <?php endif; ?>
         <!-- Password -->
         <label class="block">
             <span class="text-gray-700">Password</span>
@@ -50,6 +70,11 @@
                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 placeholder="" />
         </label>
+        <?php if (array_key_exists("password", $errors)): ?>
+            <div class="bg-gray-100 mt-2 p-2 text-red-500">
+                <?php echo e($errors['password'][0]) ?>
+            </div>
+        <?php endif; ?>
         <!-- Confirm Password -->
         <label class="block">
             <span class="text-gray-700">Confirm Password</span>
@@ -59,6 +84,11 @@
                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 placeholder="" />
         </label>
+        <?php if (array_key_exists("confirmPassword", $errors)): ?>
+            <div class="bg-gray-100 mt-2 p-2 text-red-500">
+                <?php echo e($errors['confirmPassword'][0]) ?>
+            </div>
+        <?php endif; ?>
         <!-- Terms of Service -->
         <div class="block">
             <div class="mt-2">

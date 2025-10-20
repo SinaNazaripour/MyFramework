@@ -45,9 +45,10 @@ class Router
 
             foreach ($this->middlewares as $middleware) {
                 $middlewareInstance = $container ? $container->resolve($middleware) : new $middleware;
-                $middlewareInstance->process($action);
-                return;
+                $action = fn() => $middlewareInstance->process($action);
             }
+            $action();
+            return;
         }
     }
     public function addMiddleware(string $middleware)
