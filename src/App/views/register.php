@@ -9,6 +9,7 @@
                 name="email"
                 type="email"
                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                value="<?php echo e($oldForm['email'] ?? ''); ?>"
                 placeholder="john@example.com" />
         </label>
         <?php if (array_key_exists("email", $errors)): ?>
@@ -20,6 +21,7 @@
         <label class="block">
             <span class="text-gray-700">Age</span>
             <input
+                value="<?php echo e($oldForm['age'] ?? ''); ?>"
                 name="age"
                 type="number"
                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
@@ -51,6 +53,7 @@
         <label class="block">
             <span class="text-gray-700">Social Media URL</span>
             <input
+                value="<?php echo e($oldForm['socialMedia'] ?? ''); ?>"
                 name="socialMedia"
                 type="text"
                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"

@@ -16,6 +16,16 @@ class FlashMiddleware implements MiddlewareInterface
             "errors" => $_SESSION["errors"] ?? []
         ];
         $this->view->addGlobalData($packet ?? []);
+        unset($_SESSION['errors']);
+
+        if (array_key_exists('oldForm', $_SESSION)) {
+            $oldForm = $_SESSION['oldForm'];
+            $escaped = ['password', 'confirmPassword'];
+            $oldForm = ['oldForm' => array_diff_key($oldForm, array_flip($escaped))];
+
+            $this->view->addGlobalData($oldForm);
+        }
+        unset($_SESSION['oldForm']);
         $next();
     }
 }
