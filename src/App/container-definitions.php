@@ -3,8 +3,8 @@
 declare(strict_types=1);
 
 use App\Config\Paths;
-use Framework\{TemplateEngine, Database};
-use App\Services\ValidatorService;
+use Framework\{TemplateEngine, Database, Container};
+use App\Services\{ValidatorService, UserService};
 
 
 
@@ -20,5 +20,9 @@ return [
         ],
         username: $_ENV['DB_USER'],
         password: $_ENV['DB_PASS']
-    )
+    ),
+    UserService::class => function (Container $container) {
+        $db = $container->get(Database::class);
+        return new UserService($db);
+    }
 ];
