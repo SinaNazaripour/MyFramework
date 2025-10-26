@@ -35,4 +35,45 @@ class UserService
             'social_media_url' => $data['socialMedia'],
         ]);
     }
+
+    // public function isUserExist(string $email)
+    // {
+    //     $query = "SELECT COUNT(*) FROM users WHERE email= :email";
+    //     $params = [
+    //         'email' => $email
+    //     ];
+    //     $userCount = $this->db->query($query, $params)->count();
+    //     if ($userCount < 1) {
+    //         throw new ValidationException(["password" => ["Invalid credentials"]]);
+    //     }
+    // }
+
+    // public function checkPassword($formData)
+    // {
+    //     $query = "SELECT password FROM users WHERE email= :email";
+    //     $params = [
+    //         'email' => $formData['email']
+    //     ];
+
+    //     $password = $this->db->query($query, $params)->find()['password'];
+    //     // dd($password);
+    //     dd(password_verify($formData['password'], $password));
+    // }
+    public function login($formData)
+    {
+        $query = "SELECT id,email,password FROM users WHERE email= :email";
+        $params = [
+            'email' => $formData['email']
+        ];
+
+        $user = $this->db->query($query, $params)->find();
+
+        $passwordMatch = password_verify($formData['password'], $user['password']);
+
+        if (!$user || !$passwordMatch) {
+            throw new ValidationException(["password" => ["Invalid credentials"]]);
+        }
+
+        $_SESSION['user'] = $user['id'];
+    }
 }

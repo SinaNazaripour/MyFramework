@@ -31,4 +31,20 @@ class AuhtController
         $this->userService->create($data);
         redirectTo("/");
     }
+
+    public function loginView()
+    {
+        echo $this->view->render('login.php', ['title' => 'login']);
+    }
+
+    public function login()
+    {
+        $data = $_POST;
+        $this->validatorService->validateLogin($data);
+        // $this->userService->isUserExist($data['email']);
+        // $this->userService->checkPassword($data);
+        $this->userService->login($data);
+
+        redirectTo('/');
+    }
 }
