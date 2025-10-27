@@ -34,6 +34,9 @@ class UserService
             'country' => $data['country'],
             'social_media_url' => $data['socialMedia'],
         ]);
+
+        session_regenerate_id();
+        $_SESSION['user'] = $this->db->id();
     }
 
     // public function isUserExist(string $email)
