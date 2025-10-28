@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Config;
 
 use Framework\App;
-use App\Controllers\{HomeController, AboutController, AuhtController};
+use App\Controllers\{HomeController, AboutController, AuhtController, TransactionController};
 use App\Middleware\{AuthRequireMiddleware, GuestOnlyMiddleware};
 
 function registerRoutes(App $app)
@@ -17,4 +17,6 @@ function registerRoutes(App $app)
     $app->get('/login', [AuhtController::class, 'loginView']);
     $app->post('/login', [AuhtController::class, 'login']);
     $app->get('/logout', [AuhtController::class, 'logout']);
+    $app->get('/transaction', [TransactionController::class, 'createView'])->protect(AuthRequireMiddleware::class);
+    $app->post('/transaction', [TransactionController::class, 'create'])->protect(AuthRequireMiddleware::class);
 }
