@@ -15,6 +15,7 @@ CREATE TABLE IF NOT EXISTS transactions (
     id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
     amount decimal(8,2) unsigned NOT NULL,
     description varchar(255) NOT NULL,
+    date datetime NOT NULL,
     created_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP(),
     updated_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP(),
     user_id bigint(20) unsigned NOT NULL,

@@ -1,0 +1,35 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Services;
+
+use Framework\Database;
+
+class TransactionService
+{
+    public function __construct(private Database $db) {}
+
+    public function createTransaction($data)
+    {
+
+        $formatedDate = "{$data['date']} 00:00:00";
+        $query = "INSERT INTO transactions(user_id,amount,date,description) Values(:user_id , :amount, :date, :description )";
+        $params = [
+            'user_id' => $_SESSION['user'],
+            'amount' => $data['amount'],
+            'date' => $formatedDate,
+            'description' => $data['description']
+        ];
+        $this->db->query($query, $params);
+    }
+
+    public function getUserTransactions()
+    {
+        $search = addcslashes($_GET['s'] ?? '', "%_");
+        $transactions = $this->db->query("SELECT *,DATE_FORMAT(date,'%Y-%m-%h')AS f_date FROM transactions 
+        WHERE user_id= :user_id AND description LIKE :searchQuery", ['user_id' => $_SESSION['user'], "searchQuery" => "%{$search}%"])->findAll();
+
+        return $transactions;
+    }
+}
