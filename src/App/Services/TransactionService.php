@@ -24,11 +24,14 @@ class TransactionService
         $this->db->query($query, $params);
     }
 
-    public function getUserTransactions()
+    public function getUserTransactions($length, $offset)
     {
         $search = addcslashes($_GET['s'] ?? '', "%_");
-        $transactions = $this->db->query("SELECT *,DATE_FORMAT(date,'%Y-%m-%h')AS f_date FROM transactions 
-        WHERE user_id= :user_id AND description LIKE :searchQuery", ['user_id' => $_SESSION['user'], "searchQuery" => "%{$search}%"])->findAll();
+        $transactions = $this->db->query(
+            "SELECT *,DATE_FORMAT(date,'%Y-%m-%h')AS f_date FROM transactions 
+        WHERE user_id= :user_id AND description LIKE :searchQuery LIMIT {$length} OFFSET {$offset}",
+            ['user_id' => $_SESSION['user'], "searchQuery" => "%{$search}%"]
+        )->findAll();
 
         return $transactions;
     }
