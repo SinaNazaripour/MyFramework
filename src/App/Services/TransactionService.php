@@ -27,12 +27,15 @@ class TransactionService
     public function getUserTransactions($length, $offset)
     {
         $search = addcslashes($_GET['s'] ?? '', "%_");
+        $params = ['user_id' => $_SESSION['user'], "searchQuery" => "%{$search}%"];
         $transactions = $this->db->query(
             "SELECT *,DATE_FORMAT(date,'%Y-%m-%h')AS f_date FROM transactions 
         WHERE user_id= :user_id AND description LIKE :searchQuery LIMIT {$length} OFFSET {$offset}",
-            ['user_id' => $_SESSION['user'], "searchQuery" => "%{$search}%"]
+            $params
         )->findAll();
 
-        return $transactions;
+        $count = $this->db->query("SELECT COUNT(*)FROM transactions 
+        WHERE user_id= :user_id AND description LIKE :searchQuery", $params)->count();
+        return [$transactions, $count];
     }
 }
