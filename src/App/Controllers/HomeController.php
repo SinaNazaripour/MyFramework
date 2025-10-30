@@ -17,9 +17,12 @@ class HomeController
         $searchTerm = $_GET['s'] ?? null;
         $page = $_GET['p'] ?? 1;
         $page = (int) $page ?? 1;
-        $length = 1;
+        $length = 5;
         $offset = ($page - 1) * $length;
         [$transactions, $count] = $this->transactionService->getUserTransactions($length, $offset);
+
+        $numPages = $count ? range(1, ceil($count / $length)) : [1];
+        $pageList = array_map(fn($number) => http_build_query(['p' => $number, 's' => $searchTerm]), $numPages);
         echo $this->view->render("/index.php", [
             "title" => "home",
 
@@ -32,7 +35,9 @@ class HomeController
                 "s" => $searchTerm,
             ]),
 
-            "lastPage" => ($count / $length),
+            "lastPage" => ceil($count / $length),
+
+            "pageList" => $pageList,
 
             "nextPageQuery" => http_build_query([
                 "p" => $page + 1,

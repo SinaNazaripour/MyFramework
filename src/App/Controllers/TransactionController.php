@@ -34,4 +34,23 @@ class TransactionController
         redirectTo('/');
         return;
     }
+
+    public function editView($params)
+    {
+        $transaction = $this->transactionService->getUserTransaction($params['transaction']);
+        if (!$transaction) {
+            redirectTo("/");
+            return;
+        }
+        echo $this->view->render("transactions/edit.php", ['transaction' => $transaction]);
+    }
+
+    public function edit($params)
+    {
+        $data = $_POST;
+
+        $this->validatorService->validateTransaction($data);
+        $this->transactionService->updateTransaction($data, $params['transaction']);
+        redirectTo('/');
+    }
 }

@@ -11,11 +11,13 @@ class Router
 
     public function add(string $method = "GET", string $path, array $controller)
     {
+        $regexPath = preg_replace("#{[^/]+}#", "([^/]+)", $path);
         $this->routes[] = [
             'path' => $this->normalizePath($path),
             'method' => strtoupper($method),
             'controller' => $controller,
-            'middlewares' => []
+            'middlewares' => [],
+            'regexPath' => $this->normalizePath($regexPath),
         ];
     }
 
@@ -33,16 +35,23 @@ class Router
     public function dispatch(string $path, string $method = "GET", Container|null $container = null)
     {
         $path = $this->normalizePath($path);
-        $method = strtoupper($method);
+        $method = $_POST['_METHOD'] ?? strtoupper($method);
 
         foreach ($this->routes as $route) {
-            if (!preg_match("#^{$route['path']}$#", $path) || ($method !== $route['method'])) {
+            if (!preg_match("#^{$route['regexPath']}$#", $path, $paramValues) || ($method !== $route['method'])) {
                 continue;
             }
+
+            array_shift($paramValues);
+            preg_match_all("#{([^/]+)}#", $route['path'], $paramKeys);
+            // dd($paramKeys);
+            $params = array_combine($paramKeys[1], $paramValues) ?? [];
+
             [$class, $function] = $route['controller'];
 
             $controlerInstance = $container ? $container->resolve($class) : new $class;
-            $action = fn() => $controlerInstance->{$function}();
+            $action = fn() => $controlerInstance->{$function}($params);
+
 
             $allMiddlewares = [...$route['middlewares'], ...$this->middlewares];
             foreach ($allMiddlewares as $middleware) {
