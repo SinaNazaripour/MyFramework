@@ -53,4 +53,9 @@ class TransactionService
             ["id" => $id, "user_id" => $_SESSION['user'], "amount" => $formData['amount'], "date" => $formatted_date, "description" => $formData['description']]
         );
     }
+
+    public function deleteTransaction($id)
+    {
+        $this->db->query("DELETE FROM transactions WHERE id=:id AND user_id=:user_id", ["id" => $id, "user_id" => $_SESSION['user']]);
+    }
 }

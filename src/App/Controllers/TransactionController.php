@@ -53,4 +53,10 @@ class TransactionController
         $this->transactionService->updateTransaction($data, $params['transaction']);
         redirectTo('/');
     }
+
+    public function delete($params)
+    {
+        $this->transactionService->deleteTransaction($params['transaction']);
+        redirectTo('/');
+    }
 }
